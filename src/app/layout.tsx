@@ -58,6 +58,7 @@ export default async function RootLayout({
       // La preferencia siempre es explícita: el tema viaja resuelto en el HTML
       // del servidor, así que no hay divergencia con el cliente ni parpadeo.
       data-theme={theme}
+      suppressHydrationWarning
     >
       <head>
         {/* Acento white-label inyectado en SSR: sin flash de tema */}
@@ -65,7 +66,9 @@ export default async function RootLayout({
           dangerouslySetInnerHTML={{ __html: accentCssVariables(branding.accent) }}
         />
       </head>
-      <body className="font-sans">{children}</body>
+      <body className="font-sans" suppressHydrationWarning>
+        {children}
+      </body>
     </html>
   );
 }
